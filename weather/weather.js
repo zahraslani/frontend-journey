@@ -9,7 +9,7 @@ async() => {
     if(city === '') return
 
     try{
-        const url = 'https://wttr.in/${city}?format=j1'
+        const url = `https://wttr.in/${city}?format=j1`
         const response = await fetch(url)
         const data = await response.json()
 
@@ -18,7 +18,7 @@ async() => {
 
         result.innerHTML = `
         <h2>🌤️ ${city}</h2>
-        <p>🌡️ Temperature: ${temp}°C</p>
+        <p>🌡️ emperature: ${temp}°C</p>
         <p>📝 Status: ${desc}</p>`
 
     }catch(error){
