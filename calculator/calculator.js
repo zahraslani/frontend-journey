@@ -78,7 +78,7 @@ function updateDisplay() {
         display.textContent = '0'
     }
 }
-
+//تابع عملگرها
 function getOperatorsymbol (op){
     if (op === 'add') return '+'
     if (op === 'sub') return '-'
