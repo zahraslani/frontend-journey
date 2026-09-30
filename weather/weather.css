@@ -15,6 +15,22 @@ body {
   color: white;
 }
 
+body.sunny {
+  background: linear-gradient(180deg, #f6d365 0%, #fda085 100%);
+}
+
+body.cloudy {
+  background: linear-gradient(180deg, #757F9A 0%, #D7DDE8 100%);
+}
+
+body.rainy {
+  background: linear-gradient(180deg, #373B44 0%, #4286f4 100%);
+}
+
+body.snowy {
+  background: linear-gradient(180deg, #E0EAFC 0%, #CFDEF3 100%);
+}
+
 .weather {
   width: 100%;
   max-width: 400px;
@@ -47,6 +63,7 @@ h1 {
   padding: 8px 8px 8px 20px;
   align-items: center;
   margin-top: auto;
+  position: relative;
 }
 
 #inputCity {
@@ -62,6 +79,37 @@ h1 {
 
 #inputCity::placeholder {
   color: rgba(255, 255, 255, 0.6);
+}
+
+.suggestions {
+position: absolute;
+top: 100%;
+right: 0;
+left: 0;
+background: white;
+border-radius: 10px;
+margin-top: 5px;
+max-height: 200px;
+overflow-y: auto;
+z-index: 10;
+display: none;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.suggestions.active{
+  display: block;
+}
+
+.suggestion-item {
+  color: #333;
+  padding:  10px 15px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s;
+}
+
+.suggestion-item:hover{
+  background: #f0f0f0;
 }
 
 #btnSearch {
