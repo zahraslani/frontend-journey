@@ -1,25 +1,37 @@
-const taskinput = document.getElementById('taskinput')
-const addbtn = document.getElementById('addbtn')
-const tasklist = document.getElementById('tasklist')
+class TodoApp{
+    constructor(){
+        this.tasks = []
+        this.taskinput = document.getElementById('taskinput')
+        this.addbtn = document.getElementById('addbtn')
+        this.tasklist = document.getElementById('tasklist')
+    }
 
-let tasks = []
+    init(){
+        this.addbtn.addEventListener('click', () => this.addTask())
+        this.loadtasks()
+        this.rendertasks()
+    }
+    addTask(){
+        const text = this.taskinput.value
+        if(text === '') return
+        this.tasks.push({text, done: false})
+        this.savetasks()
+        this.rendertasks()
+        this.taskinput.value = ''
+    }
+    savetasks (){
+        localStorage.setItem('tasks',
+        JSON.stringify(this.tasks)
+    )}
+    loadtasks (){
+        const saved = localStorage.getItem('tasks')
+        this.tasks = saved ? JSON.parse(saved) : []
+    }
+    rendertasks (){
 
-function savetasks (){
-    localStorage.setItem('tasks',
-        JSON.stringify(tasks)
-    )
-}
+    this.tasklist.innerHTML = ''
 
-function loadtasks (){
-    const saved = localStorage.getItem('tasks')
-    return saved ? JSON.parse(saved) : []
-}
-
-function rendertasks (){
-
-    tasklist.innerHTML = ''
-
-    tasks.forEach(task => {
+    this.tasks.forEach(task => {
         const li = document.createElement('li')
         const span = document.createElement('span')
         span.textContent = task.text
@@ -37,28 +49,19 @@ function rendertasks (){
         li.addEventListener('click', () => {
             task.done = !task.done
             li.classList.toggle('done')
-            savetasks()
+            this.savetasks()
         })
 
         deletebtn.addEventListener('click', (event) =>{
             event.stopPropagation()
-            tasks = tasks.filter(t => t !== task)
+            this.tasks = this.tasks.filter(t => t !== task)
             li.remove()
-            savetasks()
+            this.savetasks()
         })
-
-        tasklist.appendChild(li)
+        this.tasklist.appendChild(li)
     })
 }
+}
 
-addbtn.addEventListener('click', () =>{
-    const tasktext = taskinput.value
-    if (tasktext === '') return
-    tasks.push({text:tasktext, done:false})
-    savetasks()
-    rendertasks()
-    taskinput.value=''
-})
-
-tasks = loadtasks()
-rendertasks()
+const app = new TodoApp()
+app.init()
