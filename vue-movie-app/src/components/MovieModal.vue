@@ -43,11 +43,11 @@ async (newID) => {
         
         <div class="info">
           <h2>{{ movieDetails.Title }}</h2>
-          <p><strong>سال:</strong> {{ movieDetails.Year }}</p>
-          <p><strong>خلاصه:</strong> {{ movieDetails.Plot }}</p>
-          <p><strong>کارگردان:</strong> {{ movieDetails.Director }}</p>
-          <p><strong>بازیگران:</strong> {{ movieDetails.Actors }}</p>
-          <p><strong>امتیاز:</strong> ⭐ {{ movieDetails.imdbRating }}</p>
+          <p><strong>Year:</strong> {{ movieDetails.Year }}</p>
+          <p><strong>Summary:</strong> {{ movieDetails.Plot }}</p>
+          <p><strong>Director:</strong> {{ movieDetails.Director }}</p>
+          <p><strong>Cast:</strong> {{ movieDetails.Actors }}</p>
+          <p><strong>Score:</strong> ⭐ {{ movieDetails.imdbRating }}</p>
         </div>
       </div>
     </div>
