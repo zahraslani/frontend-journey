@@ -2,25 +2,23 @@
 import { computed } from 'vue'
 import { useMovieStore } from '@/stores/movie';
 
-// ۱. گرفتن اطلاعات فیلم از والد
 const props = defineProps<{
   movie: any
 }>()
 
-// ۲. اتصال به Store برای چک کردن علاقه‌مندی‌ها
 const store = useMovieStore()
 
-// ۳. آیا این فیلم توی علاقه‌مندی‌ها هست یا نه؟
+// چک می‌کنیم آیا این فیلم توی علاقه‌مندی‌ها هست یا نه
 const isFavorite = computed(() => {
   return store.favorites.some(f => f.imdbID === props.movie.imdbID)
 })
 
-// ۴. فرستادن سیگنال به والد (برای Modal)
+// سیگنال برای باز کردن Modal به والد
 const emit = defineEmits<{
   (e: 'click'): void
 }>()
 
-// ۵. تابع کلیک روی قلب
+// تابع دکمه قلب
 function toggleFav() {
   store.toggleFavorite(props.movie)
 }
@@ -38,7 +36,6 @@ function toggleFav() {
     <!-- دکمه قلب -->
     <button 
       class="fav-btn" 
-      :class="{ 'is-fav': isFavorite }"
       @click.stop="toggleFav"
     >
       {{ isFavorite ? '❤️' : '🤍' }}
@@ -47,7 +44,6 @@ function toggleFav() {
 </template>
 
 <style scoped>
-/* استایل‌های قبلی رو حفظ کن... */
 .movie-card {
   background: white;
   border-radius: 10px;

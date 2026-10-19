@@ -1,27 +1,31 @@
 <script setup lang="ts">
-import {ref} from 'vue'
-import { useMovieStore } from '@/stores/movie';
+import { ref } from 'vue'
+import { useMovieStore } from '@/stores/movie'
 
+// ۱. اتصال به Store
 const store = useMovieStore()
-//متغیر واکنشی برای متن اینپوت
-const query = ref ('')
 
-function handleSearch(){
+// ۲. متغیری برای نگه داشتن متن تایپ شده
+const query = ref('')
+
+// ۳. تابع جستجو
+function handleSearch() {
   if (query.value.trim() === '') return
   store.searchMovies(query.value)
 }
 </script>
 
 <template>
-<div class="search-bar">
-  <input 
-    v-model="query" 
-    @keydown.enter="handleSearch"
-    type="text" 
-    placeholder="اسم فیلم رو بنویس..." 
-  />
-  <button @click="handleSearch">جستجو</button>
-</div>
+  <div class="search-bar">
+    <!-- با زدن Enter یا کلیک روی دکمه، تابع handleSearch اجرا میشه -->
+    <input 
+      v-model="query" 
+      @keydown.enter="handleSearch"
+      type="text" 
+      placeholder="اسم فیلم رو بنویس..." 
+    />
+    <button @click="handleSearch">جستجو</button>
+  </div>
 </template>
 
 <style scoped>
@@ -55,6 +59,7 @@ button {
   cursor: pointer;
   font-size: 16px;
   font-family: Tahoma;
+  transition: background 0.3s;
 }
 
 button:hover {
