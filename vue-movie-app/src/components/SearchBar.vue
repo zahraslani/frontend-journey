@@ -1,18 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useMovieStore } from '@/stores/movie'
 
-// ۱. اتصال به Store
+// 1. اتصال به Store
 const store = useMovieStore()
 
-// ۲. متغیری برای نگه داشتن متن تایپ شده
+// 2. متغیری برای نگه داشتن متن تایپ شده
 const query = ref('')
 
-// ۳. تابع جستجو
+// 3. تابع جستجو
 function handleSearch() {
   if (query.value.trim() === '') return
   store.searchMovies(query.value)
 }
+//4. پاک کردن لیست فیلم ها
+watch (query, (newValue) => {
+  if (newValue === ''){
+    store.movies = []
+  }
+})
+
 </script>
 
 <template>
@@ -22,18 +29,23 @@ function handleSearch() {
       v-model="query" 
       @keydown.enter="handleSearch"
       type="text" 
-      placeholder="اسم فیلم رو بنویس..." 
+      placeholder="نام فیلم یا سریال را بنویسید..." 
     />
-    <button @click="handleSearch">جستجو</button>
+    <button @click="handleSearch">نمایش نتایج</button>
   </div>
 </template>
 
 <style scoped>
 .search-bar {
   display: flex;
+  direction: rtl;
   gap: 10px;
   max-width: 600px;
   margin: 0 auto 30px;
+  background: white;
+  padding: 8px;
+  border-radius: 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 input {
@@ -44,6 +56,7 @@ input {
   font-size: 16px;
   font-family: Tahoma;
   outline: none;
+  direction: rtl;
 }
 
 input:focus {
@@ -60,6 +73,7 @@ button {
   font-size: 16px;
   font-family: Tahoma;
   transition: background 0.3s;
+
 }
 
 button:hover {

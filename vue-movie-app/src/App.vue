@@ -3,32 +3,51 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div>
+  <div class="app-container">
     <!-- منوی بالا -->
     <nav class="navbar">
-      <RouterLink to="/">جستجو</RouterLink>
-      <RouterLink to="/favorites">علاقه‌مندی‌ها ❤️</RouterLink>
+      <RouterLink to="/">🔍 Search</RouterLink>
+      <RouterLink to="/favorites">❤️ Favorites </RouterLink>
     </nav>
 
     <!-- اینجا صفحات عوض می‌شن -->
-    <RouterView />
+    <main class="main-content">
+      <RouterView />
+    </main>
   </div>
 </template>
 
 <style>
 body {
   margin: 0;
-  background: #f0f2f5;
+  background: linear-gradient(135deg, #e0eafc 0%, #94b6e6 100%);
   font-family: Tahoma;
+  min-height: 100vh;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
 }
 
 .navbar {
   display: flex;
   justify-content: center;
   gap: 20px;
-  padding: 20px;
-  background: white;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 20px;
+  margin-bottom: 50px;
+  z-index: 100;
+  width: 100%;
 }
 
 .navbar a {
@@ -41,7 +60,11 @@ body {
 }
 
 .navbar a.router-link-active {
-  background: #667eea;
-  color: white;
+  color: #59a6e6;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
 }
 </style>

@@ -10,10 +10,10 @@ const selectedMovieId = ref<string | null>(null)
 
 <template>
   <div class="favorites-page">
-    <h1>❤️ علاقه‌مندی‌ها</h1>
+    <h1>❤️ favorites</h1>
 
     <div v-if="store.favorites.length === 0" class="empty">
-      هنوز هیچ فیلمی رو به علاقه‌مندی‌ها اضافه نکردی!
+     ! هنوز هیچ فیلمی رو به علاقه‌مندی‌ها اضافه نکردی
     </div>
 
     <div v-else class="movie-grid">

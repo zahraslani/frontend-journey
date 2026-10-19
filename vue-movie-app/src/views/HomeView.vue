@@ -38,7 +38,7 @@ function openModal(id: string) {
 
     <!-- ۴. اگه نتیجه‌ای نبود -->
     <p v-if="!store.loading && store.movies.length === 0" class="empty">
-      فیلمی پیدا نشد یا هنوز سرچ نکردی!
+      ! فیلمی پیدا نشد یا هنوز سرچ نکردی
     </p>
 
     <!-- ۵. مودال -->
