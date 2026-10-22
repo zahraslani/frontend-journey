@@ -1,0 +1,13 @@
+@import './base.css';
+
+html,
+body,
+#app {
+  min-height: 100vh;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
