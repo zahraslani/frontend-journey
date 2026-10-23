@@ -11,7 +11,7 @@ export const useMovieStore = defineStore('movies', () => {
   async function searchMovies(query: string) {
     loading.value = true
     try {
-      const url = `http://www.omdbapi.com/?apikey=1b2f9ae4&s=${query}`
+      const url = `https://www.omdbapi.com/?apikey=1b2f9ae4&s=${query}`
       const res = await fetch(url)
       const data = await res.json()
       movies.value = data.Search || []

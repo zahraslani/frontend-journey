@@ -19,7 +19,7 @@ async (newID) => {
   
   loading.value = true
   try {
-    const url = `http://www.omdbapi.com/?apikey=1b2f9ae4&i=${newID}`
+    const url = `https://www.omdbapi.com/?apikey=1b2f9ae4&i=${newID}`
     const res = await fetch(url)
     const data = await res.json()
     movieDetails.value = data

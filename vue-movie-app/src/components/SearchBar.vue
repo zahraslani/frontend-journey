@@ -18,7 +18,7 @@ async function fetchSeggestions (term: string){
     return
   }
   try{
-    const url = `http://www.omdbapi.com/?apikey=1b2f9ae4&s=${term}`
+    const url = `https://www.omdbapi.com/?apikey=1b2f9ae4&s=${term}`
     const res = await fetch(url)
     const data = await res.json()
     // فقط 5 تا پیشنهاد اول رو نشون بده
