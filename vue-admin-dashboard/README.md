@@ -1,42 +1,52 @@
-# vue-admin-dashbord
+# Vue Admin Dashboard
 
-This template should help get you started developing with Vue 3 in Vite.
+A responsive, RTL-ready admin dashboard built with Vue 3, TypeScript, and Chart.js.
 
-## Recommended IDE Setup
+**Live demo:** https://vue-admin-dashboard-seven.vercel.app
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Features
 
-## Recommended Browser Setup
+- Interactive sales chart built with Chart.js
+- Statistic cards (mock data)
+- Data table with search, sorting, and pagination (client-side)
+- RTL support for Persian language
+- Responsive layout (CSS Grid and Flexbox)
+- Component-based architecture (Layout, Sidebar, Header)
+- Type-checked build (`vue-tsc`) to catch TypeScript errors before deployment
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## Tech Stack
 
-## Type Support for `.vue` Imports in TS
+- Vue 3 (Composition API)
+- TypeScript
+- Vue Router
+- Chart.js with vue-chartjs
+- Vite
+- CSS Grid / Flexbox
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## Getting Started
 
-## Customize configuration
+**Requirements:** Node.js 22.18+ (or 24.12+)
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+```bash
+git clone https://github.com/zahraslani/frontend-journey.git
+cd frontend-journey/vue-admin-dashboard
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+Build for production:
 
-```sh
+```bash
 npm run build
 ```
+
+## What I Learned
+
+- Structuring complex layouts with reusable Vue components
+- Integrating a third-party library (Chart.js) into a Vue app
+- Implementing client-side search, sorting, and pagination logic
+- Writing type-safe code with TypeScript
+
+## Notes
+
+All data shown in the dashboard is mock data for demonstration purposes.
