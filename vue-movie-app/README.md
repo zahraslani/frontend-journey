@@ -1,48 +1,64 @@
-# vue-movie-app
+# Vue Movie Search App
 
-This template should help get you started developing with Vue 3 in Vite.
+A responsive movie search app built with Vue 3, TypeScript, and Pinia. Search movies through the OMDb API, view details, and save favorites.
 
-## Recommended IDE Setup
+**Live demo:** https://vue-movie-app-vert.vercel.app
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Features
 
-## Recommended Browser Setup
+- Search movies using the OMDb API
+- Movie details in a modal window
+- Add and remove favorites (persisted in localStorage)
+- Responsive grid layout
+- Component-based architecture (props and emits)
+- Type-checked build (`vue-tsc`)
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## Tech Stack
 
-## Type Support for `.vue` Imports in TS
+- Vue 3 (Composition API)
+- TypeScript
+- Pinia for state management
+- Vue Router
+- Vite
+- ESLint, Oxlint, and Prettier for code quality
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## Project Structure
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+```
+src/
+├── components/   MovieCard, MovieModal, SearchBar
+├── router/       route definitions
+├── stores/       Pinia stores
+└── views/        HomeView, FavoritesView
 ```
 
-### Compile and Hot-Reload for Development
+## Getting Started
 
-```sh
+**Requirements:** Node.js 22.18+ (or 24.12+)
+
+```bash
+git clone https://github.com/zahraslani/frontend-journey.git
+cd frontend-journey/vue-movie-app
+npm install
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+Other useful commands:
 
-```sh
-npm run build
+```bash
+npm run build    # type-check and build for production
+npm run lint     # lint and auto-fix
+npm run format   # format with Prettier
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## What I Learned
 
-```sh
-npm run lint
-```
+- Managing global state with Pinia
+- Working with an external REST API (async/await, error handling)
+- Structuring a Vue app with reusable components, props, and emits
+- Persisting user data with localStorage
+- Writing type-safe code with TypeScript
+
+## Data Source
+
+Movie data is provided by the [OMDb API](https://www.omdbapi.com/).
