@@ -1,6 +1,7 @@
 const API_KEY = import.meta.env.VITE_OMDB_API_KEY
 const BASE_URL = 'https://www.omdbapi.com/'
 
+//تابع پایه برای تمام درخواست ها به omdb
 async function request(params: Record<string, string>) {
   const url = new URL(BASE_URL)
   url.search = new URLSearchParams({ apikey: API_KEY, ...params }).toString()

@@ -18,8 +18,13 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style>
-:root { --color-primary: #59a6e6; --radius-lg: 20px; }
-*, *::before, *::after { box-sizing: border-box; }
+:root { 
+  --color-primary: #59a6e6; 
+  --radius-lg: 20px; 
+}
+*, *::before, *::after { 
+  box-sizing: border-box; 
+}
 body {
   margin: 0;
   background: linear-gradient(135deg, #e0eafc 0%, #94b6e6 100%);
