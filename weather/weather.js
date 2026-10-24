@@ -1,83 +1,105 @@
 const inputCity = document.getElementById('inputCity')
-const suggestions =document.getElementById('suggestions')
+const suggestions = document.getElementById('suggestions')
 const btnSearch = document.getElementById('btnSearch')
-const result =document.getElementById('result')
+const result = document.getElementById('result')
 
-inputCity.addEventListener('input',
-    async() => {
-        const query = inputCity.value
-        console.log('Query:', query)
+let timer
 
-        if(query.length < 2){
+async function fetchSuggestions(query) {
+    try {
+        const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=5&language=en`
+        const response = await fetch(url)
+        if (!response.ok) throw new Error('Request failed')
+        const data = await response.json()
+
+        if (!data.results) {
             suggestions.classList.remove('active')
             return
         }
 
-        try{
-            const url = `https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=5&language=ثد`
-            const response = await fetch(url)
-            const data = await response.json() 
-            console.log('Data:', data)
+        suggestions.innerHTML = ''
 
-            if(!data.results){
-                suggestions.classList.remove('active') 
-                return
-            }
+        data.results.forEach(city => {
+            const div = document.createElement('div')
+            div.className = 'suggestion-item'
+            div.textContent = `${city.name}, ${city.country}`
 
-            suggestions.innerHTML = ''
-
-            data.results.forEach(city  => {
-                const div  = document.createElement('div')
-                div.className = 'suggestion-item'
-                div.textContent = `${city.name}, ${city.country}`
-
-                div.addEventListener('click', () =>{
-                    inputCity.value = city.name
-                    suggestions.classList.remove('active')
-                })
-                suggestions.appendChild(div)
+            div.addEventListener('click', () => {
+                inputCity.value = city.name
+                suggestions.classList.remove('active')
             })
-            suggestions.classList.add('active')
-            
-        }catch(error){
-            result.textContent ='error' + error.message
-        }
-    }  
-)
-btnSearch.addEventListener('click', 
-async() => {
-    const city =inputCity.value
+            suggestions.appendChild(div)
+        })
+        suggestions.classList.add('active')
+    } catch (error) {
+        // suggestions are optional, so just hide the list
+        suggestions.classList.remove('active')
+    }
+}
 
-    if(city === '') return
+function setBackground(desc) {
+    const d = desc.toLowerCase()
 
-    try{
-        const url = `https://wttr.in/${city}?format=j1`
+    if (d.includes('sunny') || d.includes('clear')) {
+        document.body.className = 'sunny'
+    } else if (d.includes('cloud') || d.includes('overcast')) {
+        document.body.className = 'cloudy'
+    } else if (d.includes('rain') || d.includes('drizzle')) {
+        document.body.className = 'rainy'
+    } else if (d.includes('snow')) {
+        document.body.className = 'snowy'
+    } else {
+        document.body.className = ''
+    }
+}
+
+async function searchWeather() {
+    const city = inputCity.value.trim()
+    if (city === '') return
+
+    suggestions.classList.remove('active')
+    result.textContent = 'Loading...'
+
+    try {
+        const url = `https://wttr.in/${encodeURIComponent(city)}?format=j1`
         const response = await fetch(url)
+        if (!response.ok) throw new Error('City not found')
         const data = await response.json()
 
         const temp = data.current_condition[0].temp_C
         const desc = data.current_condition[0].weatherDesc[0].value
 
-        const descLower = desc.toLowerCase()
-        
-        if (descLower.includes('sunny') || descLower.includes('clear')) {
-            document.body.className = 'sunny'
-        } else if (descLower.includes('cloud') || descLower.includes('overcast')) {
-            document.body.className = 'cloudy'
-        } else if (descLower.includes('rain') || descLower.includes('drizzle')) {
-            document.body.className = 'rainy'
-        } else if (descLower.includes('snow')) {
-            document.body.className = 'snowy'
-        } else {
-            document.body.className = ''  
-        }
+        setBackground(desc)
 
-        result.innerHTML = `
-        <h2> ${city}🌤️</h2>
-        <p> temperature: ${temp}°C 🌡️</p>
-        <p> Status: ${desc} 📝</p>`
+        const title = document.createElement('h2')
+        title.textContent = `${city} 🌤️`
+        const tempP = document.createElement('p')
+        tempP.textContent = `Temperature: ${temp}°C 🌡️`
+        const descP = document.createElement('p')
+        descP.textContent = `Status: ${desc} 📝`
 
-    }catch(error){
-        result.textContent ='error' + error.message
+        result.innerHTML = ''
+        result.append(title, tempP, descP)
+    } catch (error) {
+        document.body.className = ''
+        result.textContent = 'Could not load the weather. Please check the city name and try again.'
     }
+}
+
+inputCity.addEventListener('input', () => {
+    clearTimeout(timer)
+    const query = inputCity.value.trim()
+
+    if (query.length < 2) {
+        suggestions.classList.remove('active')
+        return
+    }
+
+    timer = setTimeout(() => fetchSuggestions(query), 300)
+})
+
+btnSearch.addEventListener('click', searchWeather)
+
+inputCity.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') searchWeather()
 })
