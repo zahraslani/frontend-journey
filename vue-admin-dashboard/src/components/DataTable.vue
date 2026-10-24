@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 // داده‌های نمونه
 const users = ref([
@@ -26,11 +26,17 @@ const filteredUsers = computed(() => {
     )
   }
   
-  return result.sort((a, b) => a[sortBy.value].localeCompare(b[sortBy.value]))
+  return [...result].sort((a, b) => a[sortBy.value].localeCompare(b[sortBy.value]))
 })
 
 // صفحه‌بندی
-const totalPages = computed(() => Math.ceil(filteredUsers.value.length / itemsPerPage))
+const totalPages = computed(() =>
+  Math.max(1, Math.ceil(filteredUsers.value.length / itemsPerPage))
+)
+
+watch(searchQuery, () => {
+  currentPage.value = 1
+})
 const paginatedUsers = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage
   return filteredUsers.value.slice(start, start + itemsPerPage)

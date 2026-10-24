@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { Chart } from 'chart.js/auto'
 
 const chartCanvas = ref<HTMLCanvasElement | null>(null)
 
+let chart: Chart | null = null
+
 onMounted(() => {
   if (chartCanvas.value) {
-    new Chart(chartCanvas.value, {
+    chart = new Chart(chartCanvas.value, {
       type: 'line', // نوع نمودار (خطی)
       data: {
         labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور'],
@@ -41,6 +43,9 @@ onMounted(() => {
       }
     })
   }
+})
+onUnmounted(() => {
+  chart?.destroy()
 })
 </script>
 

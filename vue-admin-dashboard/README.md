@@ -4,6 +4,8 @@ A responsive, RTL-ready admin dashboard built with Vue 3, TypeScript, and Chart.
 
 **Live demo:** https://vue-admin-dashboard-seven.vercel.app
 
+![Dashboard screenshot](./screenshots/dashboard-desktop.png)
+
 ## Features
 
 - Interactive sales chart built with Chart.js
@@ -19,7 +21,7 @@ A responsive, RTL-ready admin dashboard built with Vue 3, TypeScript, and Chart.
 - Vue 3 (Composition API)
 - TypeScript
 - Vue Router
-- Chart.js with vue-chartjs
+- Chart.js
 - Vite
 - CSS Grid / Flexbox
 
