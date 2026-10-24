@@ -29,15 +29,23 @@ async function fetchSeggestions (term: string){
 }
 
 // پاک کردن لیست فیلم ها
-watch (query, (newValue) => {
-  if (newValue === ''){
+let timer: ReturnType<typeof setTimeout> | undefined
+
+watch(query, (newValue) => {
+  clearTimeout(timer)
+
+  if (newValue === '') {
     store.movies = []
     suggestions.value = []
     showSuggestions.value = false
-  }else{
-    fetchSeggestions(newValue)
+    return
   }
+
+  timer = setTimeout(() => {
+    fetchSeggestions(newValue)
+  }, 300)
 })
+
 
 //وقتی روی پیشنهاد کلیک میشه
 function selectSuggestion(title: string){
