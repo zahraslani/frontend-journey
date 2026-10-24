@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useMovieStore } from '@/stores/movie'
+import { searchMovies } from '@/api/omdb'
 
 //  اتصال به Store
 const store = useMovieStore()
@@ -18,9 +19,7 @@ async function fetchSeggestions (term: string){
     return
   }
   try{
-    const url = `https://www.omdbapi.com/?apikey=1b2f9ae4&s=${term}`
-    const res = await fetch(url)
-    const data = await res.json()
+    const data = await searchMovies(term)
     // فقط 5 تا پیشنهاد اول رو نشون بده
     suggestions.value = data.Search ? data.Search.slice(0, 5) : [] 
     showSuggestions.value = true

@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import { searchMovies as searchMoviesApi } from '@/api/omdb'
 
 export const useMovieStore = defineStore('movies', () => {
   // ۱. State (داده‌ها)
@@ -11,9 +12,7 @@ export const useMovieStore = defineStore('movies', () => {
   async function searchMovies(query: string) {
     loading.value = true
     try {
-      const url = `https://www.omdbapi.com/?apikey=1b2f9ae4&s=${query}`
-      const res = await fetch(url)
-      const data = await res.json()
+      const data = await searchMoviesApi(query)
       movies.value = data.Search || []
     } catch (error) {
       console.log(error)

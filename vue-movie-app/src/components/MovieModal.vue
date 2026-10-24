@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { getMovieById } from '@/api/omdb'
 
 const props = defineProps<{
   imdbID: string | null
@@ -19,9 +20,7 @@ async (newID) => {
   
   loading.value = true
   try {
-    const url = `https://www.omdbapi.com/?apikey=1b2f9ae4&i=${newID}`
-    const res = await fetch(url)
-    const data = await res.json()
+    const data = await getMovieById(newID)
     movieDetails.value = data
   } catch (error) {
     console.log(error)
