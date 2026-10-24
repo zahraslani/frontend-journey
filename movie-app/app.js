@@ -1,3 +1,6 @@
+const API_KEY = '1b2f9ae4'
+const BASE_URL = 'https://www.omdbapi.com/'
+
 class MovieApp{
     constructor(){
         this.themeBtn = document.getElementById('themeBtn')
@@ -43,7 +46,7 @@ class MovieApp{
         const query = this.searchInput.value.trim()
         if ( query === '') return
         try{
-            const url = `http://www.omdbapi.com/?apikey=1b2f9ae4&s=${query}`
+            const url = `${BASE_URL}?apikey=${API_KEY}&s=${encodeURIComponent(query)}`
             const response = await fetch(url)
             const data =await response.json()
             console.log(data)
@@ -66,7 +69,7 @@ class MovieApp{
             card.addEventListener('click', () =>
             this.openModal(movie))
             const poster = document.createElement('img')
-            poster.src = movie.Poster !== 'N/A' ? movie.Poster : 'https://via.placeholder.com/200x300'
+            poster.src = movie.Poster !== 'N/A' ? movie.Poster : 'https://placehold.co/200x300?text=No+Poster'
             poster.alt = movie.Title
             const title = document.createElement('h3')
             title.textContent = movie.Title
@@ -114,7 +117,7 @@ class MovieApp{
             const poster = document.createElement('img')
             poster.src = movie.Poster !== 'N/A' 
             ? movie.Poster 
-            : 'https://via.placeholder.com/200x300'
+            : 'https://placehold.co/200x300?text=No+Poster'
             poster.alt = movie.Title
             const title = document.createElement('h3')
             title.textContent = movie.Title
@@ -151,12 +154,12 @@ class MovieApp{
     }
     async openModal(movie) {
         try{
-            const url = `http://www.omdbapi.com/?apikey=1b2f9ae4&i=${movie.imdbID}`
+            const url = `${BASE_URL}?apikey=${API_KEY}&i=${movie.imdbID}`
             const response = await fetch(url)
             const data =await response.json()
 
             this.modalBody.innerHTML = `
-            <img src="${data.Poster !== 'N/A' ? data.Poster : 'https://via.placeholder.com/200x300'}" alt="${data.Title}">
+            <img src="${data.Poster !== 'N/A' ? data.Poster : 'https://placehold.co/200x300?text=No+Poster'}" alt="${data.Title}">
             <h2>${data.Title}</h2>
             <p><strong>Year:</strong> ${data.Year}</p>
             <p><strong>Plot:</strong> ${data.Plot}</p>
