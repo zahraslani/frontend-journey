@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useMovieStore } from '@/stores/movie';
+import type { Movie } from '@/types/movie'
 
 const props = defineProps<{
-  movie: any
+  movie: Movie
 }>()
 
 const store = useMovieStore()

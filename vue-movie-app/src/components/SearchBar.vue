@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue'
 import { useMovieStore } from '@/stores/movie'
 import { searchMovies } from '@/api/omdb'
+import type { Movie } from '@/types/movie'
 
 //  اتصال به Store
 const store = useMovieStore()
@@ -9,7 +10,7 @@ const store = useMovieStore()
 //  متغیری برای نگه داشتن متن تایپ شده
 const query = ref('')
 
-const suggestions = ref<any []> ([])
+const suggestions = ref<Movie []> ([])
 const showSuggestions = ref (false)
 
 //گرفتن پیشنهاد از API

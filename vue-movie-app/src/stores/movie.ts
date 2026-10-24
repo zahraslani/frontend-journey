@@ -1,11 +1,12 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { searchMovies as searchMoviesApi } from '@/api/omdb'
+import type { Movie } from '@/types/movie'
 
 export const useMovieStore = defineStore('movies', () => {
   // ۱. State (داده‌ها)
-  const movies = ref<any[]>([])
-  const favorites = ref<any[]>(JSON.parse(localStorage.getItem('favorites') || '[]'))
+  const movies = ref<Movie[]>([])
+  const favorites = ref<Movie[]>(JSON.parse(localStorage.getItem('favorites') || '[]'))
   const loading = ref(false)
 
   // ۲. Action (جستجو در API)
@@ -22,7 +23,7 @@ export const useMovieStore = defineStore('movies', () => {
   }
 
   // ۳. Action (اضافه/حذف علاقه‌مندی)
-  function toggleFavorite(movie: any) {
+  function toggleFavorite(movie: Movie) {
     const index = favorites.value.findIndex(f => f.imdbID === movie.imdbID)
     if (index === -1) {
       favorites.value.push(movie)

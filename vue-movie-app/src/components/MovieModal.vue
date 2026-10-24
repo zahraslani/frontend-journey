@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { getMovieById } from '@/api/omdb'
+import type { MovieDetails } from '@/types/movie'
 
 const props = defineProps<{
   imdbID: string | null
@@ -10,7 +11,7 @@ const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
-const movieDetails = ref<any>(null)
+const movieDetails = ref<MovieDetails | null>(null)
 const loading = ref(false)
 
 // Watch: هر وقت ID عوض شد، برو API رو صدا بزن
