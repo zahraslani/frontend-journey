@@ -38,3 +38,5 @@ __screenshots__/
 # Vite
 *.timestamp-*-*.mjs
 
+# API key file
+apikey.txt
