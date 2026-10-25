@@ -2,6 +2,8 @@
 
 A simple weather app built with HTML, CSS, and vanilla JavaScript. Search for a city, pick from autocomplete suggestions, and see the current temperature and conditions. The page background changes with the weather.
 
+**Live demo:** https://weather-app-zahra.vercel.app
+
 ## Features
 
 - City autocomplete with debounced requests (Open-Meteo Geocoding API)
