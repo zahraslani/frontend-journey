@@ -2,7 +2,7 @@
 
 A weather app built with React, TypeScript and Tailwind CSS.
 
-**Live demo:** https://YOUR-VERCEL-LINK.vercel.app
+**Live demo:** https://weather-react-amber.vercel.app
 
 ## Features
 
